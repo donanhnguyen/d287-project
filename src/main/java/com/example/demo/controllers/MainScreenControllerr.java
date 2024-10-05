@@ -6,6 +6,7 @@ import com.example.demo.repositories.PartRepository;
 import com.example.demo.repositories.ProductRepository;
 import com.example.demo.service.PartService;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.InventoryService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class MainScreenControllerr {
 
     private PartService partService;
     private ProductService productService;
+    private InventoryService inventoryService;
 
     private List<Part> theParts;
     private List<Product> theProducts;
@@ -36,9 +38,10 @@ public class MainScreenControllerr {
         this.productRepository = productRepository;
     }*/
 
-    public MainScreenControllerr(PartService partService,ProductService productService){
+    public MainScreenControllerr(PartService partService,ProductService productService, InventoryService inventoryService){
         this.partService=partService;
         this.productService=productService;
+        this.inventoryService=inventoryService;
     }
     @GetMapping("/mainscreen")
     public String listPartsandProducts(Model theModel, @Param("partkeyword") String partkeyword, @Param("productkeyword") String productkeyword){
@@ -50,6 +53,8 @@ public class MainScreenControllerr {
         List<Product> productList=productService.listAll(productkeyword);
         theModel.addAttribute("products", productList);
         theModel.addAttribute("productkeyword",productkeyword);
+        inventoryService.addSampleInventory();
+        System.out.println("In the main screen scontorller.....");
         return "mainscreen";
     }
 }
