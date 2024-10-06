@@ -54,7 +54,6 @@ public class MainScreenControllerr {
         theModel.addAttribute("products", productList);
         theModel.addAttribute("productkeyword",productkeyword);
         inventoryService.addSampleInventory();
-        System.out.println("In the main screen scontorller.....");
         return "mainscreen";
     }
 }
