@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -111,6 +112,23 @@ public class AddProductController {
         //send over to our form
         return "productForm";
     }
+
+    @GetMapping("/buyProduct")
+    public String buyProduct(@RequestParam("productID") int productId, RedirectAttributes redirectAttributes) {
+        ProductService productService = context.getBean(ProductServiceImpl.class);
+        Product product = productService.findById(productId);
+
+        if (product != null && product.getInv() > 0) {
+            product.setInv(product.getInv() - 1);  // Decrease inventory by 1
+            productService.save(product);  // Save the updated product
+            redirectAttributes.addFlashAttribute("successMessage", "Purchase successful!");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Purchase failed. Product is out of stock.");
+        }
+
+        return "redirect:/mainscreen";  // Redirect to the mainscreen
+    }
+
 
     @GetMapping("/deleteproduct")
     public String deleteProduct(@RequestParam("productID") int theId, Model theModel) {

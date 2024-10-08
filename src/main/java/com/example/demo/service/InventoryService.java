@@ -2,8 +2,7 @@ package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.domain.Crystal;
-import com.example.demo.domain.Handle;
+import com.example.demo.domain.InhousePart;
 import com.example.demo.domain.Part;
 import com.example.demo.domain.Product;
 import java.util.HashSet;
@@ -22,24 +21,18 @@ public class InventoryService {
     public void addSampleInventory() {
         List<Product> products = productService.findAll();
         List<Part> parts = partService.findAll();
-        System.out.println("Products: " + products);
-        System.out.println("Parts: " + parts);
-        System.out.println("Number of products: " + products.size());
-        System.out.println("Number of parts: " + parts.size());
-        for (Part part : parts) {
-            System.out.println("Part Name: " + part.getName() + ", Price: " + part.getPrice() + ", Inventory: " + part.getInv());
-        }
+        // add sample inventory only if inventory is empty
         if (products.isEmpty() && parts.isEmpty()) {
             System.out.println("Adding sample inventory...");
 
             Set<Part> partsSet = new HashSet<>();
 
             // Sample parts
-            Part crystal1 = new Crystal("Kyber Crystal", 100.0, 10);
-            Part crystal2 = new Crystal("Synthetic Crystal", 120.0, 15);
-            Part handle1 = new Handle("Curved Handle", 150.0, 5);
-            Part handle2 = new Handle("Straight Handle", 140.0, 7);
-            Part handle3 = new Handle("Double-bladed Handle", 200.0, 3);
+            Part crystal1 = new InhousePart(55L, "Kyber Crystal", 100.0, 10);
+            Part crystal2 = new InhousePart(66L, "Synthetic Crystal", 120.0, 15);
+            Part handle1 = new InhousePart(77L, "Curved Handle", 150.0, 5);
+            Part handle2 = new InhousePart(88L, "Straight Handle", 140.0, 7);
+            Part handle3 = new InhousePart(99L, "Double-bladed Handle", 200.0, 3);
 
             // Add sample parts, checking for duplicates
             addPartWithCheck(partsSet, crystal1);
@@ -75,7 +68,7 @@ public class InventoryService {
         if (!partsSet.add(part)) {
             // If part exists, create a multipack version
             String multiPackName = part.getName() + " Multi-Pack";
-            Part multiPackPart = new Crystal(multiPackName, part.getPrice() * 2, part.getInv() * 2); // adjust the type based on part type
+            Part multiPackPart = new InhousePart(multiPackName, part.getPrice() * 2, part.getInv() * 2); // adjust the type based on part type
             System.out.println("Duplicate part found: " + part.getName() + ", adding a multi-pack version: " + multiPackName);
             partService.save(multiPackPart);
         } else {
