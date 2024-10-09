@@ -7,7 +7,6 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.lang.IllegalArgumentException;
 
 /**
  *
@@ -50,16 +49,6 @@ public abstract class Part implements Serializable {
         this.inv = inv;
         this.minInv = minInv;
         this.maxInv = maxInv;
-//        System.out.println("inv passed in is " + inv);
-//        System.out.println("Min inv passed in is " + minInv);
-//        System.out.println("Max inv passed in is " + maxInv);
-//
-//        if (inv < minInv || inv > maxInv) {
-//            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
-//        } else {
-//            this.minInv = minInv;
-//            this.maxInv = maxInv;
-//        }
     }
 
     public Part(long id, String name, double price, int inv, int minInv, int maxInv) {
@@ -69,16 +58,6 @@ public abstract class Part implements Serializable {
         this.inv = inv;
         this.minInv = minInv;
         this.maxInv = maxInv;
-//        System.out.println("inv passed in is " + inv);
-//        System.out.println("Min inv passed in is " + minInv);
-//        System.out.println("Max inv passed in is " + maxInv);
-//
-//        if (inv < minInv || inv > maxInv) {
-//            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
-//        } else {
-//            this.minInv = minInv;
-//            this.maxInv = maxInv;
-//        }
     }
 
     public long getId() {
