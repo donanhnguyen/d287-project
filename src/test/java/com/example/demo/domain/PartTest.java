@@ -102,6 +102,46 @@ class PartTest {
     }
 
     @Test
+    void getMinInv() {
+        int minInvValue = 10;
+        partIn.setMinInv(minInvValue);
+        assertEquals(minInvValue, partIn.getMinInv());
+
+        partOut.setMinInv(minInvValue);
+        assertEquals(minInvValue, partOut.getMinInv());
+    }
+
+    @Test
+    void setMinInv() {
+        int minInvValue = 10;
+        partIn.setMinInv(minInvValue);
+        assertEquals(minInvValue, partIn.getMinInv());
+
+        partOut.setMinInv(minInvValue);
+        assertEquals(minInvValue, partOut.getMinInv());
+    }
+
+    @Test
+    void getMaxInv() {
+        int maxInvValue = 100;
+        partIn.setMaxInv(maxInvValue);
+        assertEquals(maxInvValue, partIn.getMaxInv());
+
+        partOut.setMaxInv(maxInvValue);
+        assertEquals(maxInvValue, partOut.getMaxInv());
+    }
+
+    @Test
+    void setMaxInv() {
+        int maxInvValue = 100;
+        partIn.setMaxInv(maxInvValue);
+        assertEquals(maxInvValue, partIn.getMaxInv());
+
+        partOut.setMaxInv(maxInvValue);
+        assertEquals(maxInvValue, partOut.getMaxInv());
+    }
+
+    @Test
     void getProducts() {
         Product product1= new Product();
         Product product2= new Product();

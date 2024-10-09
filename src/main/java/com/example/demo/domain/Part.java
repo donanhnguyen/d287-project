@@ -126,9 +126,6 @@ public abstract class Part implements Serializable {
     }
 
     public void setInv(int inv) {
-//        System.out.println("Current inv is " + inv);
-//        System.out.println("Min inv is " + this.minInv);
-//        System.out.println("Max inv is " + this.maxInv);
         this.inv = inv;
     }
 
