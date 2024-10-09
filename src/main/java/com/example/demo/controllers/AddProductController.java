@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -89,7 +90,25 @@ public class AddProductController {
             else{
                 product.setInv(0);
             }
-            repo.save(product);
+
+            ProductService productService = context.getBean(ProductServiceImpl.class);
+            Product product2 = productService.findById((int) product.getId());
+            Set<Part>theProductsParts = product2.getParts();
+            boolean anyPartsLow = false;
+            for(Part p: theProductsParts) {
+                System.out.println(p.getInv());
+                if (p.getInv() < p.getMinInv()) {
+                    anyPartsLow = true;
+                } else {
+                    break;
+                }
+            }
+            if (!anyPartsLow) {
+                repo.save(product);
+            } else {
+                theModel.addAttribute("lowPartInventoryError", "Inventory of parts must be between minimum and maximum values.");
+                return "productForm";
+            }
             return "confirmationaddproduct";
         }
     }

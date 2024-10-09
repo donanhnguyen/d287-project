@@ -25,6 +25,9 @@
     <div th:if="${#fields.hasAnyErrors()}">
     <ul><li th:each="err: ${#fields.allErrors()}" th:text="${err}"></li></ul>
     </div>
+    <div th:if="${lowPartInventoryError}" style="color: red;">
+        <p th:text="${lowPartInventoryError}"></p>
+    </div>
     </p>
     <p><input type="submit" value="Submit" /></p>
 </form>
