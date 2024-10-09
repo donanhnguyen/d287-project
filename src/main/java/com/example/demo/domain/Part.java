@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.lang.IllegalArgumentException;
 
 /**
  *
@@ -29,6 +30,12 @@ public abstract class Part implements Serializable {
     @Min(value = 0, message = "Inventory value must be positive")
     int inv;
 
+    @Min(value = 0, message = "Min Inventory must be positive")
+    int minInv;
+
+    @Min(value = 0, message = "Max Inventory must be positive")
+    int maxInv;
+
     @ManyToMany
     @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
             inverseJoinColumns=@JoinColumn(name="product_id"))
@@ -37,17 +44,31 @@ public abstract class Part implements Serializable {
     public Part() {
     }
 
-    public Part(String name, double price, int inv) {
+    public Part(String name, double price, int inv, int minInv, int maxInv) {
         this.name = name;
         this.price = price;
         this.inv = inv;
+
+        if (inv < minInv || inv > maxInv) {
+            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
+        } else {
+            this.minInv = minInv;
+            this.maxInv = maxInv;
+        }
     }
 
-    public Part(long id, String name, double price, int inv) {
+    public Part(long id, String name, double price, int inv, int minInv, int maxInv) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.inv = inv;
+
+        if (inv < minInv || inv > maxInv) {
+            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
+        } else {
+            this.minInv = minInv;
+            this.maxInv = maxInv;
+        }
     }
 
     public long getId() {
@@ -78,7 +99,26 @@ public abstract class Part implements Serializable {
         return inv;
     }
 
+    public int getMinInv() {
+        return minInv;
+    }
+
+    public void setMinInv(int minInv) {
+        this.minInv = minInv;
+    }
+
+    public int getMaxInv() {
+        return maxInv;
+    }
+
+    public void setMaxInv(int maxInv) {
+        this.maxInv = maxInv;
+    }
+
     public void setInv(int inv) {
+        if (inv < this.minInv || inv > this.maxInv) {
+            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
+        }
         this.inv = inv;
     }
 

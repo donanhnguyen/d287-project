@@ -17,12 +17,12 @@ public class InhousePart extends Part{
     public InhousePart() {
     }
 
-    public InhousePart(String name, double price, int inv) {
-        super(name, price, inv);
+    public InhousePart(String name, double price, int inv, int minInv, int maxInv) {
+        super(name, price, inv, minInv, maxInv);
     }
 
-    public InhousePart(long id, String name, double price, int inv) {
-        super(id, name, price, inv);
+    public InhousePart(long id, String name, double price, int inv, int minInv, int maxInv) {
+        super(id, name, price, inv, minInv, maxInv);
     }
 
     public int getPartId() {

@@ -14,7 +14,14 @@ import javax.persistence.Entity;
 public class OutsourcedPart extends Part{
 String companyName;
 
-    public OutsourcedPart() {
+    public OutsourcedPart() {}
+
+    public OutsourcedPart(String name, double price, int inv, int minInv, int maxInv) {
+        super(name, price, inv, minInv, maxInv);
+    }
+
+    public OutsourcedPart(long id, String name, double price, int inv, int minInv, int maxInv) {
+        super(id, name, price, inv, minInv, maxInv);
     }
 
     public String getCompanyName() {

@@ -28,11 +28,11 @@ public class InventoryService {
             Set<Part> partsSet = new HashSet<>();
 
             // Sample parts
-            Part crystal1 = new InhousePart(55L, "Kyber Crystal", 100.0, 10);
-            Part crystal2 = new InhousePart(66L, "Synthetic Crystal", 120.0, 15);
-            Part handle1 = new InhousePart(77L, "Curved Handle", 150.0, 5);
-            Part handle2 = new InhousePart(88L, "Straight Handle", 140.0, 7);
-            Part handle3 = new InhousePart(99L, "Double-bladed Handle", 200.0, 3);
+            Part crystal1 = new InhousePart(55L, "Kyber Crystal", 100.0, 10, 2, 20);
+            Part crystal2 = new InhousePart(66L, "Synthetic Crystal", 120.0, 15, 2, 20);
+            Part handle1 = new InhousePart(77L, "Curved Handle", 150.0, 5, 2, 20);
+            Part handle2 = new InhousePart(88L, "Straight Handle", 140.0, 7, 2, 20);
+            Part handle3 = new InhousePart(99L, "Double-bladed Handle", 200.0, 3, 2, 20);
 
             // Add sample parts, checking for duplicates
             addPartWithCheck(partsSet, crystal1);
@@ -68,7 +68,7 @@ public class InventoryService {
         if (!partsSet.add(part)) {
             // If part exists, create a multipack version
             String multiPackName = part.getName() + " Multi-Pack";
-            Part multiPackPart = new InhousePart(multiPackName, part.getPrice() * 2, part.getInv() * 2); // adjust the type based on part type
+            Part multiPackPart = new InhousePart(multiPackName, part.getPrice() * 2, part.getInv() * 2, 2, 20); // adjust the type based on part type
             System.out.println("Duplicate part found: " + part.getName() + ", adding a multi-pack version: " + multiPackName);
             partService.save(multiPackPart);
         } else {
