@@ -47,7 +47,15 @@ public class AddOutsourcedPartController {
         OutsourcedPartService repo=context.getBean(OutsourcedPartServiceImpl.class);
         OutsourcedPart op=repo.findById((int)part.getId());
         if(op!=null)part.setProducts(op.getProducts());
+
+        if (part.getInv() < part.getMinInv() || part.getInv() > part.getMaxInv()) {
+            theModel.addAttribute("inventoryError", "Inventory must be between minimum and maximum values.");
+            return "OutsourcedPartForm"; // Return form with error message
+        } else {
             repo.save(part);
+        }
+
+
         return "confirmationaddpart";}
     }
 

@@ -48,13 +48,18 @@ public abstract class Part implements Serializable {
         this.name = name;
         this.price = price;
         this.inv = inv;
-
-        if (inv < minInv || inv > maxInv) {
-            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
-        } else {
-            this.minInv = minInv;
-            this.maxInv = maxInv;
-        }
+        this.minInv = minInv;
+        this.maxInv = maxInv;
+//        System.out.println("inv passed in is " + inv);
+//        System.out.println("Min inv passed in is " + minInv);
+//        System.out.println("Max inv passed in is " + maxInv);
+//
+//        if (inv < minInv || inv > maxInv) {
+//            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
+//        } else {
+//            this.minInv = minInv;
+//            this.maxInv = maxInv;
+//        }
     }
 
     public Part(long id, String name, double price, int inv, int minInv, int maxInv) {
@@ -62,13 +67,18 @@ public abstract class Part implements Serializable {
         this.name = name;
         this.price = price;
         this.inv = inv;
-
-        if (inv < minInv || inv > maxInv) {
-            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
-        } else {
-            this.minInv = minInv;
-            this.maxInv = maxInv;
-        }
+        this.minInv = minInv;
+        this.maxInv = maxInv;
+//        System.out.println("inv passed in is " + inv);
+//        System.out.println("Min inv passed in is " + minInv);
+//        System.out.println("Max inv passed in is " + maxInv);
+//
+//        if (inv < minInv || inv > maxInv) {
+//            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
+//        } else {
+//            this.minInv = minInv;
+//            this.maxInv = maxInv;
+//        }
     }
 
     public long getId() {
@@ -116,9 +126,9 @@ public abstract class Part implements Serializable {
     }
 
     public void setInv(int inv) {
-        if (inv < this.minInv || inv > this.maxInv) {
-            throw new IllegalArgumentException("Inventory must be between minimum and maximum values.");
-        }
+//        System.out.println("Current inv is " + inv);
+//        System.out.println("Min inv is " + this.minInv);
+//        System.out.println("Max inv is " + this.maxInv);
         this.inv = inv;
     }
 
